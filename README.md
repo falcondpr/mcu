@@ -101,8 +101,6 @@ Here is a mockup of the UI that this project is aiming to achieve:
 
 ![Calendar UI Mockup](./design.png)
 
-> _Note: Replace the above image URL with the actual link to your image or upload it to your repository._
-
 ## Tech Stack
 
 - **React**: JavaScript library for building user interfaces.
