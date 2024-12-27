@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
+import { Box, Button, Flex, Grid } from "@chakra-ui/react";
 
 type ViewMode = "calendar" | "month" | "year";
 type Day = number | null;
@@ -75,36 +76,71 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
   );
 
   return (
-    <div className="w-full max-w-sm mx-auto bg-white rounded-lg shadow-md p-4 dark:bg-gray-800">
-      <div className="flex justify-between items-center mb-4">
+    <Box
+      w="full"
+      maxW="sm"
+      mx="auto"
+      bg="white"
+      rounded="lg"
+      shadow="md"
+      // p={2}
+      // className="w-full max-w-sm mx-auto bg-white rounded-lg shadow-md p-4 dark:bg-gray-800"
+    >
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
+        // className="flex justify-between items-center mb-4"
+      >
         {viewMode === "calendar" && (
           <>
-            <button
+            <Button
+              color="gray.600"
+              _hover={{
+                color: "gray.900",
+              }}
               onClick={handlePrevMonth}
-              className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              // className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
             >
               &lt;
-            </button>
-            <button
+            </Button>
+            <Button
+              color="gray.800"
+              _hover={{
+                color: "gray.900",
+              }}
               onClick={() => setViewMode("month")}
-              className="text-lg font-bold text-gray-800 dark:text-white"
+              fontSize="lg"
+              fontWeight="bold"
+              // className="text-lg font-bold text-gray-800 dark:text-white"
             >
               {currentDate.format("MMMM")}
-            </button>
-            <button
+            </Button>
+            <Button
+              color="gray.800"
+              _hover={{
+                color: "gray.900",
+              }}
+              fontSize="lg"
+              fontWeight="bold"
               onClick={() => setViewMode("year")}
-              className="text-lg font-bold text-gray-800 dark:text-white"
+              // className="text-lg font-bold text-gray-800 dark:text-white"
             >
               {currentDate.format("YYYY")}
-            </button>
-            <button
+            </Button>
+            <Button
+              color="gray.800"
+              _hover={{
+                color: "gray.900",
+              }}
               onClick={handleNextMonth}
-              className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              // className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
             >
               &gt;
-            </button>
+            </Button>
           </>
         )}
+
         {viewMode !== "calendar" && (
           <button
             onClick={() => setViewMode("calendar")}
@@ -113,7 +149,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
             &lt; Back
           </button>
         )}
-      </div>
+      </Flex>
 
       {viewMode === "month" && (
         <div className="grid grid-cols-3 gap-2">
@@ -152,37 +188,91 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       )}
 
       {viewMode === "calendar" && (
-        <div className="mt-4">
-          <div className="grid grid-cols-7 text-center text-sm text-gray-500 dark:text-gray-400">
+        <Box
+          mt={4}
+          // className="mt-4"
+        >
+          <Grid
+            gridTemplateColumns="repeat(7,1fr)"
+            textAlign="center"
+            fontSize="sm"
+            color="gray.500"
+            // className="grid grid-cols-7 text-center text-sm text-gray-500 dark:text-gray-400"
+          >
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
               (day, index) => (
                 <div key={index}>{day}</div>
               )
             )}
-          </div>
+          </Grid>
 
-          <div className="grid grid-cols-7 gap-2 mt-2">
+          <Grid
+            gridTemplateColumns="repeat(7,1fr)"
+            gap={4}
+            mt={4}
+            // className="grid grid-cols-7 gap-2 mt-2"
+          >
             {days.map((day, index) => (
-              <button
-                type="button"
+              <Button
                 key={index}
-                className={`hover:bg-gray-200 dark:hover:bg-gray-700 h-10 flex items-center justify-center rounded-full cursor-pointer 
-                  ${day && day === currentDate.date() ? "bg-blue-500 text-white" : ""}
-                  ${day && selectedDate === currentDate.date(day).format("YYYY-MM-DD") ? "bg-green-500 text-white hover:bg-green-500" : ""}
-                `}
+                type="button"
+                height="40px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                borderRadius="full"
+                color="gray.600"
+                cursor="pointer"
+                bg={
+                  day !== null && day === currentDate.date()
+                    ? "blue.500"
+                    : day !== null &&
+                        selectedDate ===
+                          currentDate.date(day).format("YYYY-MM-DD")
+                      ? "green.500"
+                      : "transparent"
+                }
+                _hover={{
+                  bg:
+                    day !== null && day === currentDate.date()
+                      ? "blue.600"
+                      : day !== null &&
+                          selectedDate ===
+                            currentDate.date(day).format("YYYY-MM-DD")
+                        ? "green.500"
+                        : "gray.200",
+                  color: "white",
+                  _dark: {
+                    bg:
+                      day !== null &&
+                      selectedDate ===
+                        currentDate.date(day).format("YYYY-MM-DD")
+                        ? "green.500"
+                        : "gray.700",
+                  },
+                }}
                 onClick={() => day && handleDayClick(day)}
               >
-                {day && (
-                  <span className="text-white w-8 h-8 flex items-center justify-center rounded-full">
+                {day !== null && (
+                  <Box
+                    as="span"
+                    textAlign="center"
+                    width="32px"
+                    height="32px"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    borderRadius="full"
+                  >
                     {day}
-                  </span>
+                  </Box>
                 )}
-              </button>
+              </Button>
             ))}
-          </div>
-        </div>
+          </Grid>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 
