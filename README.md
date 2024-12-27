@@ -106,7 +106,7 @@ Here is a mockup of the UI that this project is aiming to achieve:
 - **React**: JavaScript library for building user interfaces.
 - **TypeScript**: A superset of JavaScript that adds static typing.
 - **Day.js**: Lightweight date library for parsing, validating, manipulating, and displaying dates.
-- **Tailwind CSS**: Utility-first CSS framework for styling the component.
+- **StyleX**: The styling system that powers facebook.com
 
 ## Soon Available on npm!
 
