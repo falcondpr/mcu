@@ -23,24 +23,24 @@ The `Calendar` component provides an intuitive UI where users can:
 
 1. **Clone the repository**:
 
-   ```bash
-   git clone https://github.com/your-username/calendar-selection-component.git
-   ```
+```bash
+git clone https://github.com/your-username/calendar-selection-component.git
+```
 
 2. **Install dependencies**:
    Navigate to the project folder and install the required dependencies:
 
-   ```bash
-   cd calendar-selection-component
-   npm install
-   ```
+```bash
+cd calendar-selection-component
+npm install
+```
 
 3. **Run the project**:
    To start the development server:
 
-   ```bash
-   npm start
-   ```
+```bash
+npm start
+```
 
 4. **Open your browser**:
    Navigate to `http://localhost:3000` to see the application in action.
@@ -51,9 +51,9 @@ To use the calendar component in your React application, follow these steps:
 
 1. Import the `Calendar` component in your React component:
 
-   ```tsx
-   import Calendar from "./components/Calendar";
-   ```
+```tsx
+import Calendar from "./components/Calendar";
+```
 
 2. Use the `Calendar` component and provide the necessary props for `selectedDate` and `onSelectDate`:
 
