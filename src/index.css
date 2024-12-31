@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "HindMysuru";
+  src: url("./assets/fonts/HindMysuru-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "HindMysuru-Semibold";
+  src: url("./assets/fonts/HindMysuru-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: 600;
+}
+
+body {
+  font-family: "HindMysuru", sans-serif !important;
+}
+
+/* button {
+  font-family: "HindMysuru-Semibold", sans-serif !important;
+} */

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { Box, Button, Flex, Grid } from "@chakra-ui/react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 type ViewMode = "calendar" | "month" | "year";
 type Day = number | null;
@@ -83,15 +84,8 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       bg="white"
       rounded="lg"
       shadow="md"
-      // p={2}
-      // className="w-full max-w-sm mx-auto bg-white rounded-lg shadow-md p-4 dark:bg-gray-800"
     >
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        mb={4}
-        // className="flex justify-between items-center mb-4"
-      >
+      <Flex py={3} justifyContent="space-between" alignItems="center">
         {viewMode === "calendar" && (
           <>
             <Button
@@ -100,43 +94,49 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                 color: "gray.900",
               }}
               onClick={handlePrevMonth}
-              // className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              bgColor="transparent"
             >
-              &lt;
+              <FaAngleLeft />
             </Button>
-            <Button
-              color="gray.800"
-              _hover={{
-                color: "gray.900",
-              }}
-              onClick={() => setViewMode("month")}
-              fontSize="lg"
-              fontWeight="bold"
-              // className="text-lg font-bold text-gray-800 dark:text-white"
-            >
-              {currentDate.format("MMMM")}
-            </Button>
-            <Button
-              color="gray.800"
-              _hover={{
-                color: "gray.900",
-              }}
-              fontSize="lg"
-              fontWeight="bold"
-              onClick={() => setViewMode("year")}
-              // className="text-lg font-bold text-gray-800 dark:text-white"
-            >
-              {currentDate.format("YYYY")}
-            </Button>
+            <Flex gapX={2}>
+              <Button
+                fontFamily="HindMysuru-Semibold"
+                color="gray.800"
+                _hover={{
+                  color: "gray.900",
+                }}
+                onClick={() => setViewMode("month")}
+                fontSize="lg"
+                fontWeight="bold"
+                bgColor="transparent"
+                px="0"
+              >
+                {currentDate.format("MMMM")}
+              </Button>
+              <Button
+                fontFamily="HindMysuru-Semibold"
+                color="gray.800"
+                _hover={{
+                  color: "gray.900",
+                }}
+                fontSize="lg"
+                fontWeight="bold"
+                onClick={() => setViewMode("year")}
+                bgColor="transparent"
+                px="0"
+              >
+                {currentDate.format("YYYY")}
+              </Button>
+            </Flex>
             <Button
               color="gray.800"
               _hover={{
                 color: "gray.900",
               }}
               onClick={handleNextMonth}
-              // className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+              bgColor="transparent"
             >
-              &gt;
+              <FaAngleRight />
             </Button>
           </>
         )}
@@ -188,16 +188,12 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       )}
 
       {viewMode === "calendar" && (
-        <Box
-          mt={4}
-          // className="mt-4"
-        >
+        <Box>
           <Grid
             gridTemplateColumns="repeat(7,1fr)"
             textAlign="center"
             fontSize="sm"
             color="gray.500"
-            // className="grid grid-cols-7 text-center text-sm text-gray-500 dark:text-gray-400"
           >
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
               (day, index) => (
@@ -206,12 +202,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
             )}
           </Grid>
 
-          <Grid
-            gridTemplateColumns="repeat(7,1fr)"
-            gap={4}
-            mt={4}
-            // className="grid grid-cols-7 gap-2 mt-2"
-          >
+          <Grid gridTemplateColumns="repeat(7,1fr)" gap={4} mt={4}>
             {days.map((day, index) => (
               <Button
                 key={index}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Box } from "@chakra-ui/react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import Calendar from "../components/Calendar";
@@ -17,11 +18,11 @@ function Index() {
   };
 
   return (
-    <div className="max-w-xl mx-auto my-10">
+    <Box my={8}>
       <Calendar
         selectedDate={selectedDate}
         onSelectDate={handleSelectedDate}
       />
-    </div>
+    </Box>
   );
 }
