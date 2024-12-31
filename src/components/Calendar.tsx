@@ -142,20 +142,24 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
         {viewMode !== "calendar" && (
           <Button
             display="flex"
+            bg="transparent"
             alignItems="center"
             onClick={() => setViewMode("calendar")}
+            color="gray.800"
             ml={3}
           >
-            <FaAngleLeft />
+            <FaAngleLeft color="inherit" />
             <Box
+              color="inherit"
               display="flex"
               alignItems="center"
+              fontWeight="semibold"
               as="span"
-              fontSize="md"
+              fontSize="lg"
               lineHeight={1.5}
               height="40px"
             >
-              Back
+              Volver
             </Box>
           </Button>
         )}
