@@ -100,7 +100,6 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
             </Button>
             <Flex gapX={2}>
               <Button
-                fontFamily="HindMysuru-Semibold"
                 color="gray.800"
                 _hover={{
                   color: "gray.900",
@@ -114,7 +113,6 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                 {currentDate.format("MMMM")}
               </Button>
               <Button
-                fontFamily="HindMysuru-Semibold"
                 color="gray.800"
                 _hover={{
                   color: "gray.900",
@@ -142,49 +140,65 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
         )}
 
         {viewMode !== "calendar" && (
-          <button
+          <Button
+            display="flex"
+            alignItems="center"
             onClick={() => setViewMode("calendar")}
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+            ml={3}
           >
-            &lt; Back
-          </button>
+            <FaAngleLeft />
+            <Box
+              display="flex"
+              alignItems="center"
+              as="span"
+              fontSize="md"
+              lineHeight={1.5}
+              height="40px"
+            >
+              Back
+            </Box>
+          </Button>
         )}
       </Flex>
 
       {viewMode === "month" && (
-        <div className="grid grid-cols-3 gap-2">
+        <Flex flexWrap="wrap" gap={2} px={3} pb={3}>
           {months.map((month, index) => (
-            <button
+            <Button
               key={month}
               onClick={() => handleMonthSelect(index)}
-              className={`text-lg font-bold text-gray-800 dark:text-white ${
-                currentDate.month() === index
-                  ? "bg-gray-300 dark:bg-gray-600"
-                  : ""
-              }`}
+              bg={
+                index === currentDate.month()
+                  ? "gray.200"
+                  : "transparent"
+              }
+              color="gray.700"
+              fontSize="md"
             >
               {month}
-            </button>
+            </Button>
           ))}
-        </div>
+        </Flex>
       )}
 
       {viewMode === "year" && (
-        <div className="grid grid-cols-3 gap-2">
+        <Flex flexWrap="wrap" gap={2} px={3} pb={3}>
           {years.map((year) => (
-            <button
+            <Button
               key={year}
+              bg={
+                year === currentDate.year()
+                  ? "gray.200"
+                  : "transparent"
+              }
+              color="gray.700"
+              fontSize="md"
               onClick={() => handleYearSelect(year)}
-              className={`p-2 rounded-md text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 ${
-                currentDate.year() === year
-                  ? "bg-gray-300 dark:bg-gray-600"
-                  : ""
-              }`}
             >
               {year}
-            </button>
+            </Button>
           ))}
-        </div>
+        </Flex>
       )}
 
       {viewMode === "calendar" && (
@@ -194,6 +208,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
             textAlign="center"
             fontSize="sm"
             color="gray.500"
+            px={2}
           >
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
               (day, index) => (
@@ -202,11 +217,19 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
             )}
           </Grid>
 
-          <Grid gridTemplateColumns="repeat(7,1fr)" gap={4} mt={4}>
+          <Grid
+            mx={2}
+            gridTemplateColumns="repeat(7,1fr)"
+            rowGap={3}
+            justifyItems="center"
+            mt={4}
+            pb={3}
+          >
             {days.map((day, index) => (
               <Button
                 key={index}
                 type="button"
+                width="40px"
                 height="40px"
                 display="flex"
                 alignItems="center"
@@ -215,7 +238,10 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                 color="gray.600"
                 cursor="pointer"
                 bg={
-                  day !== null && day === currentDate.date()
+                  day !== null &&
+                  day === currentDate.date() &&
+                  currentDate.year() === new Date().getFullYear() &&
+                  currentDate.month() === new Date().getMonth()
                     ? "blue.500"
                     : day !== null &&
                         selectedDate ===
@@ -224,14 +250,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                       : "transparent"
                 }
                 _hover={{
-                  bg:
-                    day !== null && day === currentDate.date()
-                      ? "blue.600"
-                      : day !== null &&
-                          selectedDate ===
-                            currentDate.date(day).format("YYYY-MM-DD")
-                        ? "green.500"
-                        : "gray.200",
+                  bg: "gray.100",
                   color: "white",
                   _dark: {
                     bg:
@@ -248,11 +267,24 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                   <Box
                     as="span"
                     textAlign="center"
-                    width="32px"
-                    height="32px"
+                    width="40px"
+                    height="40px"
                     display="flex"
+                    color={
+                      (day !== null &&
+                        day === currentDate.date() &&
+                        currentDate.year() ===
+                          new Date().getFullYear() &&
+                        currentDate.month() ===
+                          new Date().getMonth()) ||
+                      selectedDate ===
+                        currentDate.date(day).format("YYYY-MM-DD")
+                        ? "white"
+                        : "gray.700"
+                    }
                     alignItems="center"
                     justifyContent="center"
+                    lineHeight={1}
                     borderRadius="full"
                   >
                     {day}
