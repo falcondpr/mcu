@@ -85,13 +85,21 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       rounded="lg"
       shadow="md"
     >
-      <Flex py={3} justifyContent="space-between" alignItems="center">
+      <Flex
+        py={3}
+        px={2.5}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         {viewMode === "calendar" && (
           <>
             <Button
+              rounded="full"
+              p={0}
               color="gray.600"
               _hover={{
                 color: "gray.900",
+                bgColor: "gray.200",
               }}
               onClick={handlePrevMonth}
               bgColor="transparent"
@@ -102,7 +110,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
               <Button
                 color="gray.800"
                 _hover={{
-                  color: "gray.900",
+                  color: "gray.500",
                 }}
                 onClick={() => setViewMode("month")}
                 fontSize="lg"
@@ -115,7 +123,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
               <Button
                 color="gray.800"
                 _hover={{
-                  color: "gray.900",
+                  color: "gray.500",
                 }}
                 fontSize="lg"
                 fontWeight="bold"
@@ -127,8 +135,11 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
               </Button>
             </Flex>
             <Button
+              rounded="full"
+              p={0}
               color="gray.800"
               _hover={{
+                bgColor: "gray.200",
                 color: "gray.900",
               }}
               onClick={handleNextMonth}
@@ -147,6 +158,11 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
             onClick={() => setViewMode("calendar")}
             color="gray.800"
             ml={3}
+            p={0}
+            columnGap={3}
+            _hover={{
+              color: "gray.500",
+            }}
           >
             <FaAngleLeft color="inherit" />
             <Box
@@ -173,11 +189,17 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
               onClick={() => handleMonthSelect(index)}
               bg={
                 index === currentDate.month()
-                  ? "gray.200"
+                  ? "blue.400"
                   : "transparent"
               }
-              color="gray.700"
+              color={
+                index === currentDate.month() ? "white" : "gray.700"
+              }
               fontSize="md"
+              _hover={{
+                bgColor: "gray.400",
+                color: "white",
+              }}
             >
               {month}
             </Button>
@@ -192,11 +214,17 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
               key={year}
               bg={
                 year === currentDate.year()
-                  ? "gray.200"
+                  ? "blue.400"
                   : "transparent"
               }
-              color="gray.700"
+              color={
+                year === currentDate.year() ? "white" : "gray.700"
+              }
               fontSize="md"
+              _hover={{
+                bgColor: "gray.400",
+                color: "white",
+              }}
               onClick={() => handleYearSelect(year)}
             >
               {year}
@@ -234,6 +262,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                 key={index}
                 type="button"
                 width="40px"
+                p={0}
                 height="40px"
                 display="flex"
                 alignItems="center"
@@ -254,7 +283,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                       : "transparent"
                 }
                 _hover={{
-                  bg: "gray.100",
+                  bg: "gray.300",
                   color: "white",
                   _dark: {
                     bg:
@@ -286,6 +315,9 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                         ? "white"
                         : "gray.700"
                     }
+                    _hover={{
+                      color: "inherit",
+                    }}
                     alignItems="center"
                     justifyContent="center"
                     lineHeight={1}
