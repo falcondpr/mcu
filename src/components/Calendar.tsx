@@ -182,47 +182,65 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       </Flex>
 
       {viewMode === "month" && (
-        <Flex flexWrap="wrap" gap={2} px={3} pb={3}>
+        <Grid
+          gridTemplateColumns="repeat(3,1fr)"
+          gap={4}
+          px={3}
+          pb={3}
+        >
           {months.map((month, index) => (
             <Button
               key={month}
               onClick={() => handleMonthSelect(index)}
+              outlineOffset={2}
+              outline={
+                index === new Date().getMonth()
+                  ? "1.5px dashed #0F1923"
+                  : "none"
+              }
               bg={
-                index === currentDate.month()
-                  ? "blue.400"
-                  : "transparent"
+                index === currentDate.month() ? "#0F1923" : "#F2F2F2"
               }
               color={
                 index === currentDate.month() ? "white" : "gray.700"
               }
-              fontSize="md"
+              rounded="full"
+              fontSize="sm"
               _hover={{
-                bgColor: "gray.400",
+                bgColor: "#bfbfbf",
                 color: "white",
               }}
             >
               {month}
             </Button>
           ))}
-        </Flex>
+        </Grid>
       )}
 
       {viewMode === "year" && (
-        <Flex flexWrap="wrap" gap={2} px={3} pb={3}>
+        <Grid
+          gridTemplateColumns="repeat(3,1fr)"
+          gap={4}
+          px={3}
+          pb={3}
+        >
           {years.map((year) => (
             <Button
               key={year}
-              bg={
-                year === currentDate.year()
-                  ? "blue.400"
-                  : "transparent"
-              }
+              bg={year === currentDate.year() ? "#0F1923" : "#F2F2F2"}
               color={
-                year === currentDate.year() ? "white" : "gray.700"
+                year === currentDate.year() ? "white" : "#0F1923"
               }
-              fontSize="md"
+              outlineOffset={2}
+              outline={
+                +year === Number(new Date().getFullYear())
+                  ? "1.5px dashed #0F1923"
+                  : "none"
+              }
+              fontSize="sm"
+              rounded="full"
               _hover={{
-                bgColor: "gray.400",
+                bgColor: "#bfbfbf",
                 color: "white",
               }}
               onClick={() => handleYearSelect(year)}
@@ -230,7 +248,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
               {year}
             </Button>
           ))}
-        </Flex>
+        </Grid>
       )}
 
       {viewMode === "calendar" && (
@@ -275,7 +293,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                   day === currentDate.date() &&
                   currentDate.year() === new Date().getFullYear() &&
                   currentDate.month() === new Date().getMonth()
-                    ? "blue.500"
+                    ? "#0F1923"
                     : day !== null &&
                         selectedDate ===
                           currentDate.date(day).format("YYYY-MM-DD")
