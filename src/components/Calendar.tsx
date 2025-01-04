@@ -289,15 +289,14 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                 color="gray.600"
                 cursor="pointer"
                 bg={
-                  day !== null &&
-                  day === currentDate.date() &&
-                  currentDate.year() === new Date().getFullYear() &&
-                  currentDate.month() === new Date().getMonth()
-                    ? "#0F1923"
+                  day === dayjs(selectedDate).get("date")
+                    ? "green.500"
                     : day !== null &&
-                        selectedDate ===
-                          currentDate.date(day).format("YYYY-MM-DD")
-                      ? "green.500"
+                        day === currentDate.date() &&
+                        currentDate.year() ===
+                          new Date().getFullYear() &&
+                        currentDate.month() === new Date().getMonth()
+                      ? "#0F1923"
                       : "transparent"
                 }
                 _hover={{
