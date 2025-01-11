@@ -71,10 +71,10 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
     "December",
   ];
 
-  const years = Array.from(
-    { length: 12 },
-    (_, i) => currentDate.year() - 5 + i
-  );
+  const years = [];
+  for (let year = 2027; year >= 1970; year--) {
+    years.push(year);
+  }
 
   return (
     <Box
@@ -84,6 +84,8 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       bg="white"
       rounded="lg"
       shadow="md"
+      maxH="361px"
+      overflowY="auto"
     >
       <Flex
         py={3}
@@ -289,7 +291,11 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
                 color="gray.600"
                 cursor="pointer"
                 bg={
-                  day === dayjs(selectedDate).get("date")
+                  day === dayjs(selectedDate).get("date") &&
+                  dayjs(currentDate).get("month") ===
+                    dayjs(selectedDate).get("month") &&
+                  dayjs(currentDate).get("year") ===
+                    dayjs(selectedDate).get("year")
                     ? "green.500"
                     : day !== null &&
                         day === currentDate.date() &&

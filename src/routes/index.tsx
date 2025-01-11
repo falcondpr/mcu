@@ -18,7 +18,7 @@ function Index() {
   };
 
   return (
-    <Box my={8}>
+    <Box mt={8} w="90%" mx="auto">
       <Calendar
         selectedDate={selectedDate}
         onSelectDate={handleSelectedDate}
