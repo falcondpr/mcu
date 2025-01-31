@@ -112,6 +112,10 @@ Here is a mockup of the UI that this project is aiming to achieve:
 
 We are working on publishing this component to npm, so it will be easy to install and use in your React projects. Stay tuned for the official release!
 
+## TODO's
+
+- [ ] Rename it because it's not limited to React
+
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE).
