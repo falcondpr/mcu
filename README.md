@@ -1,4 +1,4 @@
-# React Modern Calendar
+# Modern Calendar UI
 
 This project is a simple, interactive **Calendar Selection Component** built with **React** and **TypeScript**. The component allows users to select a specific day from a calendar, which can be useful for applications requiring date-based selection such as booking systems, event scheduling, or personal planners.
 
@@ -24,7 +24,7 @@ The `Calendar` component provides an intuitive UI where users can:
 1. **Clone the repository**:
 
 ```bash
-git clone https://github.com/your-username/calendar-selection-component.git
+git clone https://github.com/falcondpr/mcu.git
 ```
 
 2. **Install dependencies**:
@@ -106,7 +106,7 @@ Here is a mockup of the UI that this project is aiming to achieve:
 - **React**: JavaScript library for building user interfaces.
 - **TypeScript**: A superset of JavaScript that adds static typing.
 - **Day.js**: Lightweight date library for parsing, validating, manipulating, and displaying dates.
-- **StyleX**: The styling system that powers facebook.com
+- **ChakraUI**: Accessible React components for building high-quality web apps
 
 ## Soon Available on npm!
 
@@ -114,7 +114,8 @@ We are working on publishing this component to npm, so it will be easy to instal
 
 ## TODO's
 
-- [ ] Rename it because it's not limited to React
+- [x] Rename it because it's not limited to React
+- [ ] Be able to select start and end
 
 ## License
 
