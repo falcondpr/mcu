@@ -1,13 +1,13 @@
 import { Box, Button, Grid } from "@chakra-ui/react";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 
-import { Day } from "./Calendar";
+export type Day = number | null;
 
 interface DaysViewProps {
   selectedDate: string | null;
   currentDate: Dayjs;
-  handleDayClick: (day: Day) => void;
-  days: Day[];
+  handleDayClick: (day: number) => void;
+  days: any[];
 }
 
 export default function DaysView({
@@ -16,6 +16,14 @@ export default function DaysView({
   handleDayClick,
   days,
 }: DaysViewProps) {
+  const isToday = (day: number) =>
+    day === currentDate.date() &&
+    currentDate.year() === new Date().getFullYear() &&
+    currentDate.month() === new Date().getMonth();
+
+  const isSelected = (day: number) =>
+    selectedDate === currentDate.date(day).format("YYYY-MM-DD");
+
   return (
     <Box>
       <Grid
@@ -27,7 +35,7 @@ export default function DaysView({
       >
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
           (day, index) => (
-            <div key={index}>{day}</div>
+            <Box key={index}>{day}</Box>
           )
         )}
       </Grid>
@@ -45,71 +53,59 @@ export default function DaysView({
             key={index}
             type="button"
             width="40px"
-            p={0}
             height="40px"
             display="flex"
             alignItems="center"
             justifyContent="center"
             borderRadius="full"
             color={
-              (day !== null &&
-                day === currentDate.date() &&
-                currentDate.year() === new Date().getFullYear() &&
-                currentDate.month() === new Date().getMonth()) ||
-              selectedDate ===
-                currentDate.date(day as number).format("YYYY-MM-DD")
-                ? "white"
-                : "gray.700"
+              isToday(day) || isSelected(day)
+                ? {
+                    _light: "white",
+                    _dark: "white",
+                  }
+                : {
+                    _light: "gray.700",
+                    _dark: "gray.400",
+                  }
             }
             cursor="pointer"
             bg={
-              day === dayjs(selectedDate).get("date") &&
-              dayjs(currentDate).get("month") ===
-                dayjs(selectedDate).get("month") &&
-              dayjs(currentDate).get("year") ===
-                dayjs(selectedDate).get("year")
-                ? "green.500"
-                : day !== null &&
-                    day === currentDate.date() &&
-                    currentDate.year() === new Date().getFullYear() &&
-                    currentDate.month() === new Date().getMonth()
-                  ? "#0F1923"
-                  : !day
-                    ? "transparent"
-                    : "#F2F2F2"
+              isSelected(day)
+                ? {
+                    _light: "green.500",
+                    _dark: "green.600",
+                  }
+                : isToday(day)
+                  ? {
+                      _light: "#0F1923",
+                      _dark: "hsl(210, 40%, 22%)",
+                    }
+                  : day
+                    ? {
+                        _light: "#F2F2F2",
+                        _dark: "#333",
+                      }
+                    : "transparent"
             }
             _hover={{
               bg: "gray.300",
               color: "white",
               _dark: {
-                bg:
-                  day !== null &&
-                  selectedDate ===
-                    currentDate.date(day).format("YYYY-MM-DD")
-                    ? "green.500"
-                    : "gray.700",
+                bg: isSelected(day) ? "green.500" : "gray.700",
               },
             }}
-            onClick={() => day && handleDayClick(day)}
+            onClick={() => handleDayClick(day)}
           >
-            {day !== null && (
-              <Box
-                as="span"
-                textAlign="center"
-                width="40px"
-                height="40px"
-                display="flex"
-                _hover={{
-                  color: "inherit",
-                }}
-                alignItems="center"
-                justifyContent="center"
-                lineHeight={1}
-                borderRadius="full"
-              >
-                {day}
-              </Box>
-            )}
+            <Box
+              as="span"
+              textAlign="center"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              {day}
+            </Box>
           </Button>
         ))}
       </Grid>

@@ -24,8 +24,28 @@ export default function MonthView({
               ? "1.5px dashed #0F1923"
               : "none"
           }
-          bg={index === currentDate.month() ? "#0F1923" : "#F2F2F2"}
-          color={index === currentDate.month() ? "white" : "gray.700"}
+          bg={
+            index === currentDate.month()
+              ? {
+                  _light: "#0F1923",
+                  _dark: "#F2F2F2",
+                }
+              : {
+                  _light: "#F2F2F2",
+                  _dark: "#333",
+                }
+          }
+          color={
+            index === currentDate.month()
+              ? {
+                  _light: "white",
+                  _dark: "gray.700",
+                }
+              : {
+                  _light: "gray.700",
+                  _dark: "white",
+                }
+          }
           rounded="full"
           fontSize="sm"
           _hover={{

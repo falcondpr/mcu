@@ -85,11 +85,19 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       w="full"
       maxW="sm"
       mx="auto"
-      bg="white"
+      bg={{
+        _dark: "gray.900",
+        _light: "white",
+      }}
       rounded="lg"
-      shadow="md"
-      maxH="361px"
+      border="1px solid"
+      borderColor={{
+        _dark: "gray.800",
+        _light: "gray.200",
+      }}
+      maxH="363px"
       overflowY="auto"
+      className="hide-scrollbar"
     >
       <Header
         viewMode={viewMode}

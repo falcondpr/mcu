@@ -17,7 +17,6 @@ export default function Header({
   currentDate,
   setViewMode,
   handlePrevMonth,
-  handleNextMonth,
 }: HeaderProps) {
   return (
     <Flex
@@ -31,10 +30,19 @@ export default function Header({
           <Button
             rounded="full"
             p={0}
-            color="gray.600"
+            color={{
+              _light: "gray.600",
+              _dark: "gray.200",
+            }}
             _hover={{
-              color: "gray.900",
-              bgColor: "gray.200",
+              color: {
+                _light: "gray.900",
+                _dark: "gray.200",
+              },
+              bgColor: {
+                _light: "gray.200",
+                _dark: "gray.800",
+              },
             }}
             onClick={handlePrevMonth}
             bgColor="transparent"
@@ -43,7 +51,10 @@ export default function Header({
           </Button>
           <Flex gapX={2}>
             <Button
-              color="gray.800"
+              color={{
+                _light: "gray.800",
+                _dark: "gray.300",
+              }}
               _hover={{
                 color: "gray.500",
               }}
@@ -56,7 +67,10 @@ export default function Header({
               {currentDate.format("MMMM")}
             </Button>
             <Button
-              color="gray.800"
+              color={{
+                _light: "gray.800",
+                _dark: "gray.300",
+              }}
               _hover={{
                 color: "gray.500",
               }}
@@ -72,12 +86,21 @@ export default function Header({
           <Button
             rounded="full"
             p={0}
-            color="gray.800"
-            _hover={{
-              bgColor: "gray.200",
-              color: "gray.900",
+            color={{
+              _light: "gray.600",
+              _dark: "gray.200",
             }}
-            onClick={handleNextMonth}
+            _hover={{
+              color: {
+                _light: "gray.900",
+                _dark: "gray.200",
+              },
+              bgColor: {
+                _light: "gray.200",
+                _dark: "gray.800",
+              },
+            }}
+            onClick={handlePrevMonth}
             bgColor="transparent"
           >
             <FaAngleRight />
@@ -91,7 +114,10 @@ export default function Header({
           bg="transparent"
           alignItems="center"
           onClick={() => setViewMode("calendar")}
-          color="gray.800"
+          color={{
+            _light: "gray.800",
+            _dark: "gray.300",
+          }}
           ml={3}
           p={0}
           columnGap={3}

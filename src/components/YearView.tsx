@@ -17,8 +17,28 @@ export default function YearView({
       {years.map((year) => (
         <Button
           key={year}
-          bg={year === currentDate.year() ? "#0F1923" : "#F2F2F2"}
-          color={year === currentDate.year() ? "white" : "#0F1923"}
+          bg={
+            year === currentDate.year()
+              ? {
+                  _light: "#0F1923",
+                  _dark: "#F2F2F2",
+                }
+              : {
+                  _light: "#F2F2F2",
+                  _dark: "#333",
+                }
+          }
+          color={
+            year === currentDate.year()
+              ? {
+                  _light: "white",
+                  _dark: "#333",
+                }
+              : {
+                  _light: "#0F1923",
+                  _dark: "white",
+                }
+          }
           outlineOffset={2}
           outline={
             +year === Number(new Date().getFullYear())
