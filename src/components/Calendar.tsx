@@ -87,7 +87,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       mx="auto"
       bg={{
         _dark: "gray.900",
-        _light: "white",
+        _light: "gray.100",
       }}
       rounded="lg"
       border="1px solid"
@@ -95,7 +95,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
         _dark: "gray.800",
         _light: "gray.200",
       }}
-      maxH="363px"
+      maxH="full"
       overflowY="auto"
       className="hide-scrollbar"
     >

@@ -16,11 +16,6 @@ export default function DaysView({
   handleDayClick,
   days,
 }: DaysViewProps) {
-  const isToday = (day: number) =>
-    day === currentDate.date() &&
-    currentDate.year() === new Date().getFullYear() &&
-    currentDate.month() === new Date().getMonth();
-
   const isSelected = (day: number) =>
     selectedDate === currentDate.date(day).format("YYYY-MM-DD");
 
@@ -57,43 +52,32 @@ export default function DaysView({
             display="flex"
             alignItems="center"
             justifyContent="center"
-            borderRadius="full"
+            borderRadius="xl"
             color={
-              isToday(day) || isSelected(day)
-                ? {
-                    _light: "white",
-                    _dark: "white",
-                  }
+              isSelected(day)
+                ? "white"
                 : {
-                    _light: "gray.700",
                     _dark: "gray.400",
+                    _light: "gray.600",
                   }
             }
             cursor="pointer"
             bg={
               isSelected(day)
                 ? {
-                    _light: "green.500",
-                    _dark: "green.600",
+                    _light: "gray.800",
+                    _dark: "black",
                   }
-                : isToday(day)
+                : day
                   ? {
-                      _light: "#0F1923",
-                      _dark: "hsl(210, 40%, 22%)",
+                      _dark: "gray.800",
+                      _light: "gray.200",
                     }
-                  : day
-                    ? {
-                        _light: "#F2F2F2",
-                        _dark: "#333",
-                      }
-                    : "transparent"
+                  : "transparent"
             }
             _hover={{
-              bg: "gray.300",
+              bg: { _dark: "gray.500", _light: "gray.600" },
               color: "white",
-              _dark: {
-                bg: isSelected(day) ? "green.500" : "gray.700",
-              },
             }}
             onClick={() => handleDayClick(day)}
           >
