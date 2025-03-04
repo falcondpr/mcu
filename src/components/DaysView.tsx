@@ -4,9 +4,10 @@ import { Dayjs } from "dayjs";
 export type Day = number | null;
 
 interface DaysViewProps {
-  selectedDate: string | null;
+  isPreviousMonthArray: boolean[];
+  selectedDate: Dayjs | null;
   currentDate: Dayjs;
-  handleDayClick: (day: number) => void;
+  handleDayClick: (day: number, isPreviousMonth: boolean) => void;
   days: any[];
 }
 
@@ -15,9 +16,15 @@ export default function DaysView({
   currentDate,
   handleDayClick,
   days,
+  isPreviousMonthArray,
 }: DaysViewProps) {
-  const isSelected = (day: number) =>
-    selectedDate === currentDate.date(day).format("YYYY-MM-DD");
+  const isSelected = (day: number, isPreviousMonth: boolean) => {
+    const dateToCompare = isPreviousMonth
+      ? currentDate.subtract(1, "month").date(day)
+      : currentDate.date(day);
+
+    return selectedDate?.isSame(dateToCompare, "day");
+  };
 
   return (
     <Box>
@@ -43,55 +50,75 @@ export default function DaysView({
         mt={4}
         pb={3}
       >
-        {days.map((day, index) => (
-          <Button
-            key={index}
-            type="button"
-            width="40px"
-            height="40px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            borderRadius="xl"
-            color={
-              isSelected(day)
-                ? "white"
-                : {
-                    _dark: "gray.400",
-                    _light: "gray.600",
-                  }
-            }
-            cursor="pointer"
-            bg={
-              isSelected(day)
-                ? {
-                    _light: "gray.800",
-                    _dark: "black",
-                  }
-                : day
-                  ? {
-                      _dark: "gray.800",
-                      _light: "gray.200",
-                    }
-                  : "transparent"
-            }
-            _hover={{
-              bg: { _dark: "gray.500", _light: "gray.600" },
-              color: "white",
-            }}
-            onClick={() => handleDayClick(day)}
-          >
-            <Box
-              as="span"
-              textAlign="center"
+        {days.map((day, index) => {
+          const isPreviousMonth = isPreviousMonthArray[index];
+
+          return (
+            <Button
+              key={index}
+              type="button"
+              width="40px"
+              height="40px"
               display="flex"
               alignItems="center"
               justifyContent="center"
+              borderRadius="xl"
+              border={{
+                _dark: isSelected(day, isPreviousMonth)
+                  ? "1px solid"
+                  : "1px solid",
+              }}
+              borderColor={{
+                _light: "gray.400",
+                _dark: "gray.600",
+              }}
+              color={
+                isSelected(day, isPreviousMonth)
+                  ? "white"
+                  : {
+                      _dark: "gray.400",
+                      _light: "gray.600",
+                    }
+              }
+              cursor="pointer"
+              opacity={
+                isSelected(day, isPreviousMonth) && isPreviousMonth
+                  ? "0.87"
+                  : isPreviousMonth
+                    ? "0.4"
+                    : ""
+              }
+              bg={
+                isSelected(day, isPreviousMonth)
+                  ? {
+                      _light: "gray.800",
+                      _dark: "black",
+                    }
+                  : day
+                    ? {
+                        _dark: "gray.900",
+                        _light: "#f2f2f2",
+                      }
+                    : "transparent"
+              }
+              _hover={{
+                bg: { _dark: "gray.500", _light: "gray.600" },
+                color: "white",
+              }}
+              onClick={() => handleDayClick(day, isPreviousMonth)}
             >
-              {day}
-            </Box>
-          </Button>
-        ))}
+              <Box
+                as="span"
+                textAlign="center"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                {day}
+              </Box>
+            </Button>
+          );
+        })}
       </Grid>
     </Box>
   );

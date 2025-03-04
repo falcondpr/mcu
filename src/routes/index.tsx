@@ -5,6 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import Calendar from "../components/Calendar";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import { useColorMode } from "../components/ui/color-mode";
+import dayjs, { Dayjs } from "dayjs";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -13,13 +14,13 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const [selectedDate, setSelectedDate] = useState<string | null>(
-    new Date().toISOString()
-  );
+  const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
 
-  const handleSelectedDate = (date: string) => {
+  const handleSelectedDate = (date: Dayjs) => {
     setSelectedDate(date);
   };
+
+  console.log(selectedDate.format("DD/MM/YYYY"));
 
   return (
     <Box mt={8} w="90%" mx="auto">

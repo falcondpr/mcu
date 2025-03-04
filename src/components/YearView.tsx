@@ -13,40 +13,43 @@ export default function YearView({
   handleYearSelect,
 }: YearViewProps) {
   return (
-    <Grid gridTemplateColumns="repeat(3,1fr)" gap={4} px={3} pb={3}>
+    <Grid gridTemplateColumns="repeat(4,1fr)" gap={4} px={3} pb={3}>
       {years.map((year) => (
         <Button
           key={year}
           bg={
             year === currentDate.year()
               ? {
-                  _light: "#0F1923",
+                  _light: "gray.900",
                   _dark: "#F2F2F2",
                 }
               : {
                   _light: "#F2F2F2",
-                  _dark: "#333",
+                  _dark: "gray.800",
                 }
           }
           color={
             year === currentDate.year()
               ? {
                   _light: "white",
-                  _dark: "#333",
+                  _dark: "gray.900",
                 }
               : {
-                  _light: "#0F1923",
+                  _light: "gray.900",
                   _dark: "white",
                 }
           }
           outlineOffset={2}
-          outline={
+          border={
             +year === Number(new Date().getFullYear())
-              ? "1.5px dashed #0F1923"
+              ? {
+                  _light: "1.5px dashed #333",
+                  _dark: "1.5px dashed #fff",
+                }
               : "none"
           }
           fontSize="sm"
-          rounded="full"
+          rounded="xl"
           _hover={{
             bgColor: "#bfbfbf",
             color: "white",

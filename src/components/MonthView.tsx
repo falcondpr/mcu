@@ -19,20 +19,23 @@ export default function MonthView({
           key={month}
           onClick={() => handleMonthSelect(index)}
           outlineOffset={2}
-          outline={
+          border={
             index === new Date().getMonth()
-              ? "1.5px dashed #0F1923"
+              ? {
+                  _light: "1.5px dashed #0F1923",
+                  _dark: "1.5px dashed #FFF",
+                }
               : "none"
           }
           bg={
             index === currentDate.month()
               ? {
-                  _light: "#0F1923",
+                  _light: "gray.900",
                   _dark: "#F2F2F2",
                 }
               : {
-                  _light: "#F2F2F2",
-                  _dark: "#333",
+                  _light: "#dcdcdc",
+                  _dark: "gray.800",
                 }
           }
           color={
@@ -46,7 +49,7 @@ export default function MonthView({
                   _dark: "white",
                 }
           }
-          rounded="full"
+          rounded="xl"
           fontSize="sm"
           _hover={{
             bgColor: "#bfbfbf",

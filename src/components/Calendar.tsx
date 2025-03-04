@@ -11,20 +11,24 @@ export type ViewMode = "calendar" | "month" | "year";
 export type Day = number | null;
 
 interface CalendarProps {
-  selectedDate: string | null;
-  onSelectDate: (date: string) => void;
+  selectedDate: Dayjs | null;
+  onSelectDate: (date: Dayjs) => void;
 }
 
 const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
   const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
   const [viewMode, setViewMode] = useState<ViewMode>("calendar");
   const [days, setDays] = useState<Day[]>([]);
+  const [isPreviousMonth, setIsPreviousMonth] = useState<boolean[]>(
+    []
+  );
 
-  const handleDayClick = (day: Day) => {
-    if (day !== null) {
-      const selectedDate = currentDate.date(day).format("YYYY-MM-DD");
-      onSelectDate(selectedDate);
-    }
+  const handleDayClick = (day: number, isPreviousMonth: boolean) => {
+    const selectedDate = isPreviousMonth
+      ? currentDate.subtract(1, "month").date(day)
+      : currentDate.date(day);
+
+    onSelectDate(selectedDate);
   };
 
   const handlePrevMonth = () =>
@@ -46,18 +50,24 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
   useEffect(() => {
     const daysInMonth = currentDate.daysInMonth();
     const firstDayOfMonth = currentDate.startOf("month").day();
+    const previousMonth = currentDate.subtract(1, "month");
+    const daysInPreviousMonth = previousMonth.daysInMonth();
 
-    const updatedDays: Day[] = [];
+    const updatedDays: number[] = [];
+    const isPreviousMonthArray: boolean[] = [];
 
-    for (let i = 0; i < firstDayOfMonth; i++) {
-      updatedDays.push(null);
+    for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+      updatedDays.push(daysInPreviousMonth - i);
+      isPreviousMonthArray.push(true); // Marcar como día del mes anterior
     }
 
     for (let i = 1; i <= daysInMonth; i++) {
       updatedDays.push(i);
+      isPreviousMonthArray.push(false); // Marcar como día del mes actual
     }
 
     setDays(updatedDays);
+    setIsPreviousMonth(isPreviousMonthArray); // Guardar información sobre qué días son del mes anterior
   }, [currentDate]);
 
   const months = [
@@ -87,7 +97,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       mx="auto"
       bg={{
         _dark: "gray.900",
-        _light: "gray.100",
+        _light: "#f2f2f2",
       }}
       rounded="lg"
       border="1px solid"
@@ -95,7 +105,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
         _dark: "gray.800",
         _light: "gray.200",
       }}
-      maxH="full"
+      maxH={viewMode === "year" ? "380px" : "full"}
       overflowY="auto"
       className="hide-scrollbar"
     >
@@ -125,6 +135,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
 
       {viewMode === "calendar" && (
         <DaysView
+          isPreviousMonthArray={isPreviousMonth}
           selectedDate={selectedDate}
           currentDate={currentDate}
           days={days}

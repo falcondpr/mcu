@@ -17,6 +17,7 @@ export default function Header({
   currentDate,
   setViewMode,
   handlePrevMonth,
+  handleNextMonth,
 }: HeaderProps) {
   return (
     <Flex
@@ -28,7 +29,7 @@ export default function Header({
       {viewMode === "calendar" && (
         <>
           <Button
-            rounded="full"
+            rounded="xl"
             p={0}
             color={{
               _light: "gray.600",
@@ -84,7 +85,7 @@ export default function Header({
             </Button>
           </Flex>
           <Button
-            rounded="full"
+            rounded="xl"
             p={0}
             color={{
               _light: "gray.600",
@@ -100,7 +101,7 @@ export default function Header({
                 _dark: "gray.800",
               },
             }}
-            onClick={handlePrevMonth}
+            onClick={handleNextMonth}
             bgColor="transparent"
           >
             <FaAngleRight />
