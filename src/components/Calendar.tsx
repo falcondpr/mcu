@@ -97,7 +97,7 @@ const Calendar = ({ selectedDate, onSelectDate }: CalendarProps) => {
       mx="auto"
       bg={{
         _dark: "gray.900",
-        _light: "#f2f2f2",
+        _light: "#f7f7f7",
       }}
       rounded="lg"
       border="1px solid"

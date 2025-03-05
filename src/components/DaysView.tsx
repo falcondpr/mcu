@@ -67,14 +67,20 @@ export default function DaysView({
                 _dark: isSelected(day, isPreviousMonth)
                   ? "1px solid"
                   : "1px solid",
+                _light: isSelected(day, isPreviousMonth)
+                  ? "none"
+                  : "1px solid",
               }}
               borderColor={{
-                _light: "gray.400",
-                _dark: "gray.600",
+                _light: "gray.300",
+                _dark: "gray.700",
               }}
               color={
                 isSelected(day, isPreviousMonth)
-                  ? "white"
+                  ? {
+                      _dark: "gray.900",
+                      _light: "white",
+                    }
                   : {
                       _dark: "gray.400",
                       _light: "gray.600",
@@ -92,18 +98,18 @@ export default function DaysView({
                 isSelected(day, isPreviousMonth)
                   ? {
                       _light: "gray.800",
-                      _dark: "black",
+                      _dark: "gray.100",
                     }
                   : day
                     ? {
                         _dark: "gray.900",
-                        _light: "#f2f2f2",
+                        _light: "#f7f7f7",
                       }
                     : "transparent"
               }
               _hover={{
-                bg: { _dark: "gray.500", _light: "gray.600" },
-                color: "white",
+                bg: { _dark: "gray.800", _light: "gray.200" },
+                color: { _dark: "white", _light: "" },
               }}
               onClick={() => handleDayClick(day, isPreviousMonth)}
             >

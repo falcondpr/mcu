@@ -24,7 +24,7 @@ export default function YearView({
                   _dark: "#F2F2F2",
                 }
               : {
-                  _light: "#F2F2F2",
+                  _light: "gray.200",
                   _dark: "gray.800",
                 }
           }
@@ -40,14 +40,6 @@ export default function YearView({
                 }
           }
           outlineOffset={2}
-          border={
-            +year === Number(new Date().getFullYear())
-              ? {
-                  _light: "1.5px dashed #333",
-                  _dark: "1.5px dashed #fff",
-                }
-              : "none"
-          }
           fontSize="sm"
           rounded="xl"
           _hover={{
